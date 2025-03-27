@@ -1,0 +1,28 @@
+using Dedsi.Ddd.Domain.Shared.EntityIds;
+using Volo.Abp;
+using Volo.Abp.Domain.Entities;
+
+namespace {{projectname}}.{{domainname}}s;
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="Id"></param>
+public record {{domainname}}Id(Guid Id) : GuidStronglyTypedId(Id);
+
+/// <summary>
+/// 
+/// </summary>
+public class {{domainname}} : Entity<{{domainname}}Id>
+{
+    protected {{domainname}}()
+    {
+        
+    }
+
+    public {{domainname}}({{domainname}}Id id): base(id)
+    {
+
+    }
+
+}
