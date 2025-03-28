@@ -7,22 +7,30 @@ namespace {{projectname}}.{{domainname}}s;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="Id"></param>
-public record {{domainname}}Id(Guid Id) : GuidStronglyTypedId(Id);
-
-/// <summary>
-/// 
-/// </summary>
-public class {{domainname}} : Entity<{{domainname}}Id>
+public class {{domainname}} : Entity<Guid>
 {
     protected {{domainname}}()
     {
         
     }
 
-    public {{domainname}}({{domainname}}Id id): base(id)
+    public {{domainname}}(Guid id): base(id)
     {
 
     }
 
 }
+
+// 以下代码请复制到 EfCore DbContext
+#region {{domainname}}
+public DbSet<{{domainname}}> {{domainname}}s { get; set; }
+#endregion
+
+// 以下代码请复制到 EfCore DbContext ModelCreating Extensions
+#region {{domainname}}
+builder.Entity<{{domainname}}>(b =>
+{
+    b.ToTable("{{domainname}}s", "");
+    b.HasKey(x => x.Id);
+});
+#endregion

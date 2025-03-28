@@ -1,0 +1,29 @@
+using {{projectname}}.{{domainname}}s.Dtos;
+using {{projectname}}.{{domainname}}s.Queries;
+using Dedsi.Ddd.CQRS.Mediators;
+using Microsoft.AspNetCore.Mvc;
+
+namespace {{projectname}}.{{domainname}}s;
+
+/// <summary>
+/// {{domainname}}
+/// </summary>
+/// <param name="dedsiMediator"></param>
+/// <param name="{{domainname}}Query"></param>
+public class {{domainname}}Controller(
+    IDedsiMediator dedsiMediator,
+    I{{domainname}}Query {{domainname}}Query)
+    : {{projectname}}Controller
+{
+
+    /// <summary>
+    /// 分页查询
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public Task<{{domainname}}PagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input)
+    {
+        return {{domainname}}Query.{{domainname}}PagedAsync(input, HttpContext.RequestAborted);
+    }
+}

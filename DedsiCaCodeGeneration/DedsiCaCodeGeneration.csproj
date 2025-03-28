@@ -8,12 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Update="TemplateFiles\Domain">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Scriban" Version="6.0.0" />
     </ItemGroup>
 

@@ -1,0 +1,39 @@
+using Dedsi.Ddd.Application.Contracts.Dtos;
+using Volo.Abp.Application.Dtos;
+
+namespace {{projectname}}.{{domainname}}s.Dtos;
+
+/// <summary>
+/// 
+/// </summary>
+public class {{domainname}}Dto : EntityDto<Guid>
+{
+
+}
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="Id"></param>
+/// <param name="Name"></param>
+public record {{domainname}}IdNameDto(Guid Id,string Name);
+
+/// <summary>
+/// 
+/// </summary>
+/// <param name="Value"></param>
+/// <param name="Name"></param>
+public record {{domainname}}ValueNameDto(string Value,string Name);
+
+/// <summary>
+/// 
+/// </summary>
+public class {{domainname}}PagedInputDto: DedsiPagedRequestDto;
+
+/// <summary>
+/// 
+/// </summary>
+public class {{domainname}}PagedResultDto: DedsiPagedResultDto<{{domainname}}Dto>
+{
+    
+}
