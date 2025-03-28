@@ -9,8 +9,8 @@ var projectName = Console.ReadLine();
 Console.WriteLine("请输入领域名称：");
 var domainName = Console.ReadLine();
 
-var templateFilePath = "D:\\Github\\CaCodeGeneration\\DedsiCaCodeGeneration\\TemplateFiles";
-var outputFilePath = "C:\\Users\\Cohen\\Desktop\\" + domainName;
+var templateFilePath = "./TemplateFiles";
+var outputFilePath = $"./{projectName}/{domainName}";
 FileHelper.DirectoryCreate(outputFilePath);
 Console.WriteLine("创建目录成功！");
 
@@ -49,7 +49,7 @@ async Task CreateCommandHandlerAsync()
 
     FileHelper.FileCreate(newOutputFilePath, $"Create{domainName}CommandHandler.cs", result);
     
-    Console.WriteLine($"Create {actionName} CreateCommandHandler Ok!");
+    Console.WriteLine($"Create {actionName} CreateCommandHandler File Ok!");
     #endregion
     
     #region UpadateCommandHandler
@@ -59,7 +59,7 @@ async Task CreateCommandHandlerAsync()
 
     FileHelper.FileCreate(newOutputFilePath, $"Update{domainName}CommandHandler.cs", result, false);
     
-    Console.WriteLine($"Create {actionName} UpdateCommandHandler Ok!");
+    Console.WriteLine($"Create {actionName} UpdateCommandHandler File Ok!");
     #endregion
     
     #region UpadateCommandHandler
@@ -69,7 +69,7 @@ async Task CreateCommandHandlerAsync()
 
     FileHelper.FileCreate(newOutputFilePath, $"Delete{domainName}CommandHandler.cs", result, false);
     
-    Console.WriteLine($"Create {actionName} DeleteCommandHandler Ok!");
+    Console.WriteLine($"Create {actionName} DeleteCommandHandler File Ok!");
     #endregion
 }
 

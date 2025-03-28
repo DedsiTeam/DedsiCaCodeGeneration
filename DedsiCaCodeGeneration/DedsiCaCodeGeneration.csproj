@@ -11,4 +11,31 @@
       <PackageReference Include="Scriban" Version="6.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="TemplateFiles\Dtos">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\Domain">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\Controller">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\Repositories\EfCoreRepository">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\Queries\EfCoreQuery">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\CommandHandlers\CreateCommandHandler">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\CommandHandlers\DeleteCommandHandler">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TemplateFiles\CommandHandlers\UpdateCommandHandler">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

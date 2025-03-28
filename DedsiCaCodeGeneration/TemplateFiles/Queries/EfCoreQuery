@@ -9,7 +9,9 @@ namespace {{projectname}}.{{domainname}}.Queries;
 
 public interface I{{domainname}}Query : IDedsiQuery
 {
-    Task<CrtadgStationPagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input, CancellationToken cancellationToken);
+    Task<{{domainname}}Dto> GetAsync(Guid id, CancellationToken cancellationToken);
+
+    Task<{{domainname}}PagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input, CancellationToken cancellationToken);
 }
 
 public class {{domainname}}Query(IDbContextProvider<{{projectname}}DbContext> dbContextProvider)
@@ -18,6 +20,12 @@ public class {{domainname}}Query(IDbContextProvider<{{projectname}}DbContext> db
 {
     /// <inheritdoc />
     public async Task<{{domainname}}PagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input, CancellationToken cancellationToken)
+    {
+        var dbContext = await GetDbContextAsync();
+    }
+    
+    /// <inheritdoc />
+    public async Task<{{domainname}}Dto> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var dbContext = await GetDbContextAsync();
     }
