@@ -1,12 +1,13 @@
 using {{projectname}}.Repositories.{{domainname}}s;
 using Dedsi.Ddd.CQRS.CommandHandlers;
 using Dedsi.Ddd.CQRS.Commands;
+using FluentValidation;
 
 namespace {{projectname}}.{{domainname}}s.CommandHandlers;
 
-public record Update{{domainname}}Command(Guid id): DedsiCommand<bool>;
+public record Update{{domainname}}Command(Guid Id): DedsiCommand<bool>;
 
-public class Update{{domainname}}CommandValidator : AbstractValidator<Update{{domainname}}Command()>
+public class Update{{domainname}}CommandValidator : AbstractValidator<Update{{domainname}}Command>
 {
     public Update{{domainname}}CommandValidator()
     {
@@ -14,7 +15,7 @@ public class Update{{domainname}}CommandValidator : AbstractValidator<Update{{do
     }
 }
 
-public class Update{{domainname}}CommandHandler(I{{domainname}}Repository {{domainname}}Repository) : DedsiCommandHandler<Update{{domainname}}Command, bool>
+public class Update{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository) : DedsiCommandHandler<Update{{domainname}}Command, bool>
 {
     public override async Task<bool> Handle(Update{{domainname}}Command commandHandler, CancellationToken cancellationToken)
     {

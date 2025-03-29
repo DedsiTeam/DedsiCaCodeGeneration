@@ -26,14 +26,22 @@ public record {{domainname}}IdNameDto(Guid Id,string Name);
 public record {{domainname}}ValueNameDto(string Value,string Name);
 
 /// <summary>
-/// 
+/// PagingQuery Input
 /// </summary>
-public class {{domainname}}PagedInputDto: DedsiPagedRequestDto;
+public class {{domainname}}PagingQueryInputDto: DedsiPagedRequestDto;
 
 /// <summary>
-/// 
+/// PagingQuery Result
 /// </summary>
-public class {{domainname}}PagedResultDto: DedsiPagedResultDto<{{domainname}}Dto>
-{
-    
-}
+public class {{domainname}}PagingQueryResultDto: DedsiPagedResultDto<{{domainname}}Dto>;
+
+/// <summary>
+/// Create
+/// </summary>
+public record Create{{domainname}}InputDto();
+
+/// <summary>
+/// Update
+/// </summary>
+/// <param name="Id"></param>
+public record Update{{domainname}}InputDto(Guid Id);

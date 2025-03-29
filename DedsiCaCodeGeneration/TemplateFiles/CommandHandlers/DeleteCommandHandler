@@ -1,12 +1,13 @@
 using {{projectname}}.Repositories.{{domainname}}s;
 using Dedsi.Ddd.CQRS.CommandHandlers;
 using Dedsi.Ddd.CQRS.Commands;
+using FluentValidation;
 
 namespace {{projectname}}.{{domainname}}s.CommandHandlers;
 
 public record Delete{{domainname}}Command(Guid Id): DedsiCommand<bool>;
 
-public class Delete{{domainname}}CommandValidator : AbstractValidator<Delete{{domainname}}Command()>
+public class Delete{{domainname}}CommandValidator : AbstractValidator<Delete{{domainname}}Command>
 {
     public Delete{{domainname}}CommandValidator()
     {
@@ -14,11 +15,11 @@ public class Delete{{domainname}}CommandValidator : AbstractValidator<Delete{{do
     }
 }
 
-public class Delete{{domainname}}CommandHandler(I{{domainname}}Repository {{domainname}}Repository): DedsiCommandHandler<Delete{{domainname}}Command, bool>
+public class Delete{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository): DedsiCommandHandler<Delete{{domainname}}Command, bool>
 {
     public override async Task<bool> Handle(Delete{{domainname}}Command command, CancellationToken cancellationToken)
     {
-        await {{domainname}}Repository.DeleteAsync(a => a.Id == command.Id, false, cancellationToken);
+        await {{humpdomainname}}Repository.DeleteAsync(a => a.Id == command.Id, false, cancellationToken);
         
         return true;
     }

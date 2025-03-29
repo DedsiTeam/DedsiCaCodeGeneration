@@ -1,17 +1,17 @@
-using {{projectname}}.{{domainname}}.Dtos;
+using {{projectname}}.{{domainname}}s.Dtos;
 using {{projectname}}.EntityFrameworkCore;
 using Dedsi.Ddd.Domain.Queries;
 using Dedsi.EntityFrameworkCore.Queries;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
-namespace {{projectname}}.{{domainname}}.Queries;
+namespace {{projectname}}.{{domainname}}s.Queries;
 
 public interface I{{domainname}}Query : IDedsiQuery
 {
     Task<{{domainname}}Dto> GetAsync(Guid id, CancellationToken cancellationToken);
 
-    Task<{{domainname}}PagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input, CancellationToken cancellationToken);
+    Task<{{domainname}}PagingQueryResultDto> PagingQueryAsync({{domainname}}PagingQueryInputDto input, CancellationToken cancellationToken);
 }
 
 public class {{domainname}}Query(IDbContextProvider<{{projectname}}DbContext> dbContextProvider)
@@ -19,14 +19,24 @@ public class {{domainname}}Query(IDbContextProvider<{{projectname}}DbContext> db
         I{{domainname}}Query
 {
     /// <inheritdoc />
-    public async Task<{{domainname}}PagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input, CancellationToken cancellationToken)
+    public async Task<{{domainname}}PagingQueryResultDto> PagingQueryAsync({{domainname}}PagingQueryInputDto input, CancellationToken cancellationToken)
     {
         var dbContext = await GetDbContextAsync();
+        
+        return new {{domainname}}PagingQueryResultDto()
+        {
+        
+        };
     }
     
     /// <inheritdoc />
     public async Task<{{domainname}}Dto> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         var dbContext = await GetDbContextAsync();
+        
+        return new {{domainname}}Dto()
+        {
+        
+        };
     }
 }

@@ -1,3 +1,4 @@
+using {{projectname}}.{{domainname}}s.CommandHandlers;
 using {{projectname}}.{{domainname}}s.Dtos;
 using {{projectname}}.{{domainname}}s.Queries;
 using Dedsi.Ddd.CQRS.Mediators;
@@ -12,28 +13,62 @@ namespace {{projectname}}.{{domainname}}s;
 /// <param name="{{domainname}}Query"></param>
 public class {{domainname}}Controller(
     IDedsiMediator dedsiMediator,
-    I{{domainname}}Query {{domainname}}Query)
+    I{{domainname}}Query {{humpdomainname}}Query)
     : {{projectname}}Controller
 {
     /// <summary>
-    /// 分页查询
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpGet("{id}")]
-    public async Task<{{domainname}}Dto> GetAsync(Guid id)
-    {
-        return {{domainname}}Query.GetAsync(id, HttpContext.RequestAborted);
-    }
-
-    /// <summary>
-    /// 分页查询
+    /// Create
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost]
-    public Task<{{domainname}}PagedResultDto> {{domainname}}PagedAsync({{domainname}}PagedInputDto input)
+    public Task<bool> CreateAsync(Create{{domainname}}InputDto input)
     {
-        return {{domainname}}Query.{{domainname}}PagedAsync(input, HttpContext.RequestAborted);
+        return dedsiMediator.SendAsync(new Create{{domainname}}Command(input), HttpContext.RequestAborted);
     }
+    
+    /// <summary>
+    /// Delete 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpPost("{id}")]
+    public Task<bool> DeleteAsync(Guid id)
+    {
+        return dedsiMediator.SendAsync(new Delete{{domainname}}Command(id), HttpContext.RequestAborted);
+    }
+
+    /// <summary>
+    /// Update
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public Task<bool> UpdateAsync(Update{{domainname}}InputDto input)
+    {
+        return dedsiMediator.SendAsync(new Update{{domainname}}Command(input.Id), HttpContext.RequestAborted);
+    }
+    
+    /// <summary>
+    /// Get
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public Task<{{domainname}}Dto> GetAsync(Guid id)
+    {
+        return {{humpdomainname}}Query.GetAsync(id, HttpContext.RequestAborted);
+    }
+
+    /// <summary>
+    /// Paging Query
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public Task<{{domainname}}PagingQueryResultDto> PagingQueryAsync({{domainname}}PagingQueryInputDto input)
+    {
+        return {{humpdomainname}}Query.PagingQueryAsync(input, HttpContext.RequestAborted);
+    }
+    
 }

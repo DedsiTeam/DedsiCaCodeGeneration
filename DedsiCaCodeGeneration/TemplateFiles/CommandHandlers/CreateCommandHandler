@@ -1,12 +1,13 @@
 using {{projectname}}.Repositories.{{domainname}}s;
 using Dedsi.Ddd.CQRS.CommandHandlers;
 using Dedsi.Ddd.CQRS.Commands;
+using FluentValidation;
 
 namespace {{projectname}}.{{domainname}}s.CommandHandlers;
 
 public record Create{{domainname}}Command(): DedsiCommand<bool>;
 
-public class Create{{domainname}}CommandValidator : AbstractValidator<Create{{domainname}}Command()>
+public class Create{{domainname}}CommandValidator : AbstractValidator<Create{{domainname}}Command>
 {
     public Create{{domainname}}CommandValidator()
     {
@@ -14,14 +15,14 @@ public class Create{{domainname}}CommandValidator : AbstractValidator<Create{{do
     }
 }
 
-public class Create{{domainname}}CommandHandler(I{{domainname}}Repository {{domainname}}Repository) : DedsiCommandHandler<Create{{domainname}}Command, bool>
+public class Create{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository) : DedsiCommandHandler<Create{{domainname}}Command, bool>
 {
     public override async Task<bool> Handle(Create{{domainname}}Command commandHandler, CancellationToken cancellationToken)
     {
         var domainId = GuidGenerator.Create();
-        var {{domainname}} = new {{domainname}}(domainId);
+        var {{humpdomainname}} = new {{domainname}}(domainId);
 
-        await {{domainname}}Repository.InsertAsync({{domainname}}, false, cancellationToken);
+        await {{humpdomainname}}Repository.InsertAsync({{humpdomainname}}, false, cancellationToken);
         
         return true;
     }

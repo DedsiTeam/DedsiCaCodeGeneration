@@ -1,5 +1,4 @@
-﻿// https://github.com/scriban/scriban
-
+﻿using System.Text.RegularExpressions;
 using DedsiCaCodeGeneration;
 using Scriban;
 
@@ -8,13 +7,16 @@ var projectName = Console.ReadLine();
 
 Console.WriteLine("请输入领域名称：");
 var domainName = Console.ReadLine();
+var humpDomainName = Regex.Replace(domainName, "^[A-Z]", match => match.Value.ToLower());;
+
+var inputData = new { projectname = projectName, domainname = domainName, humpdomainname = humpDomainName };
 
 var templateFilePath = "./TemplateFiles";
-var outputFilePath = $"./{projectName}/{domainName}";
+var outputFilePath = $"./Result/{projectName}/{domainName}s";
 FileHelper.DirectoryCreate(outputFilePath);
 Console.WriteLine("创建目录成功！");
 
-await CreateDomainFile();
+await CreateDomainFileAsync();
 await CreateCommandHandlerAsync();
 await CreateEfCoreRepositoryAsync();
 await CreateQueryAsync();
@@ -23,16 +25,16 @@ await CreateControllerAsync();
 return;
 
 
-async Task CreateDomainFile()
+async Task CreateDomainFileAsync()
 {
     var actionName = "Domain";
     
-    var text = await File.ReadAllTextAsync(templateFilePath + "\\" + actionName);
+    var text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}");
     
     var template = Template.Parse(text);
-    var result = template.Render(new { projectname = projectName, domainname = domainName });
+    var result = template.Render();
     
-    FileHelper.FileCreate(outputFilePath + "\\" + actionName,$"{domainName}.cs", result);
+    FileHelper.FileCreate($"{outputFilePath}\\{actionName}\\{domainName}s",$"{domainName}.cs", result);
     
     Console.WriteLine($"Create {actionName} File Ok!");
 }
@@ -40,12 +42,12 @@ async Task CreateDomainFile()
 async Task CreateCommandHandlerAsync()
 {
     var actionName = "CommandHandlers";
-    var newOutputFilePath = $"{outputFilePath}\\{actionName}";
+    var newOutputFilePath = $"{outputFilePath}\\UseCases\\{actionName}";
 
     #region CreateCommandHandler
     var text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}\\CreateCommandHandler");
     var template = Template.Parse(text);
-    var result = template.Render(new { projectname = projectName, domainname = domainName });
+    var result = template.Render(inputData);
 
     FileHelper.FileCreate(newOutputFilePath, $"Create{domainName}CommandHandler.cs", result);
     
@@ -55,7 +57,7 @@ async Task CreateCommandHandlerAsync()
     #region UpadateCommandHandler
     text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}\\UpdateCommandHandler");
     template = Template.Parse(text);
-    result = template.Render(new { projectname = projectName, domainname = domainName });
+    result = template.Render(inputData);
 
     FileHelper.FileCreate(newOutputFilePath, $"Update{domainName}CommandHandler.cs", result, false);
     
@@ -65,7 +67,7 @@ async Task CreateCommandHandlerAsync()
     #region UpadateCommandHandler
     text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}\\DeleteCommandHandler");
     template = Template.Parse(text);
-    result = template.Render(new { projectname = projectName, domainname = domainName });
+    result = template.Render(inputData);
 
     FileHelper.FileCreate(newOutputFilePath, $"Delete{domainName}CommandHandler.cs", result, false);
     
@@ -76,12 +78,12 @@ async Task CreateCommandHandlerAsync()
 async Task CreateEfCoreRepositoryAsync()
 {
     var actionName = "Repositories";
-    var newOutputFilePath = $"{outputFilePath}\\{actionName}";
+    var newOutputFilePath = $"{outputFilePath}\\Infrastructures\\{domainName}s";
     
     #region CreateCommandHandler
     var text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}\\EfCoreRepository");
     var template = Template.Parse(text);
-    var result = template.Render(new { projectname = projectName, domainname = domainName });
+    var result = template.Render(inputData);
 
     FileHelper.FileCreate(newOutputFilePath, $"{domainName}Repository.cs", result);
     
@@ -92,14 +94,14 @@ async Task CreateEfCoreRepositoryAsync()
 async Task CreateQueryAsync()
 {
     var actionName = "Queries";
-    var newOutputFilePath = $"{outputFilePath}\\{actionName}";
+    var newOutputFilePath = $"{outputFilePath}\\UseCases\\{actionName}";
     
     #region EfCoreQuery
     var text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}\\EfCoreQuery");
     var template = Template.Parse(text);
-    var result = template.Render(new { projectname = projectName, domainname = domainName });
+    var result = template.Render(inputData);
 
-    FileHelper.FileCreate(newOutputFilePath, $"{domainName}Query.cs", result);
+    FileHelper.FileCreate(newOutputFilePath, $"{domainName}Query.cs", result, false);
     
     Console.WriteLine($"Create {actionName} File Ok!");
     #endregion
@@ -108,12 +110,12 @@ async Task CreateQueryAsync()
 async Task CreateDtoAsync()
 {
     var actionName = "Dtos";
-    var newOutputFilePath = $"{outputFilePath}\\{actionName}";
+    var newOutputFilePath = $"{outputFilePath}\\Shareds\\{domainName}s";
     
     #region Dtos
     var text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}");
     var template = Template.Parse(text);
-    var result = template.Render(new { projectname = projectName, domainname = domainName });
+    var result = template.Render(inputData);
 
     FileHelper.FileCreate(newOutputFilePath, $"{domainName}Dto.cs", result);
     
@@ -124,12 +126,12 @@ async Task CreateDtoAsync()
 async Task CreateControllerAsync()
 {
     var actionName = "Controller";
-    var newOutputFilePath = $"{outputFilePath}\\{actionName}";
+    var newOutputFilePath = $"{outputFilePath}\\HttpApis\\{domainName}s";
 
     #region Dtos
     var text = await File.ReadAllTextAsync($"{templateFilePath}\\{actionName}");
     var template = Template.Parse(text);
-    var result = template.Render(new { projectname = projectName, domainname = domainName });
+    var result = template.Render(inputData);
 
     FileHelper.FileCreate(newOutputFilePath, $"{domainName}{actionName}.cs", result);
     
