@@ -10,7 +10,7 @@ namespace {{projectname}}.{{domainname}}s;
 /// {{domainname}}
 /// </summary>
 /// <param name="dedsiMediator"></param>
-/// <param name="{{domainname}}Query"></param>
+/// <param name="{{humpdomainname}}Query"></param>
 public class {{domainname}}Controller(
     IDedsiMediator dedsiMediator,
     I{{domainname}}Query {{humpdomainname}}Query)
