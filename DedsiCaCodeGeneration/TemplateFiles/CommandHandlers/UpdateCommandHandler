@@ -17,7 +17,7 @@ public class Update{{domainname}}CommandValidator : AbstractValidator<Update{{do
 
 public class Update{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository) : DedsiCommandHandler<Update{{domainname}}Command, bool>
 {
-    public override async Task<bool> Handle(Update{{domainname}}Command commandHandler, CancellationToken cancellationToken)
+    public override async Task<bool> Handle(Update{{domainname}}Command command, CancellationToken cancellationToken)
     {
         return true;
     }

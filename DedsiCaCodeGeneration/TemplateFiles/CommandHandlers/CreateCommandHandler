@@ -17,7 +17,7 @@ public class Create{{domainname}}CommandValidator : AbstractValidator<Create{{do
 
 public class Create{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository) : DedsiCommandHandler<Create{{domainname}}Command, bool>
 {
-    public override async Task<bool> Handle(Create{{domainname}}Command commandHandler, CancellationToken cancellationToken)
+    public override async Task<bool> Handle(Create{{domainname}}Command command, CancellationToken cancellationToken)
     {
         var domainId = GuidGenerator.Create();
         var {{humpdomainname}} = new {{domainname}}(domainId);
