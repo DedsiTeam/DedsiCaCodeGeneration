@@ -5,8 +5,14 @@ using FluentValidation;
 
 namespace {{projectname}}.{{domainname}}s.CommandHandlers;
 
+/// <summary>
+/// Update {{domainname}} Command
+/// </summary>
 public record Update{{domainname}}Command(Guid Id): DedsiCommand<bool>;
 
+/// <summary>
+/// Update {{domainname}} Command Validator
+/// </summary>
 public class Update{{domainname}}CommandValidator : AbstractValidator<Update{{domainname}}Command>
 {
     public Update{{domainname}}CommandValidator()
@@ -15,6 +21,10 @@ public class Update{{domainname}}CommandValidator : AbstractValidator<Update{{do
     }
 }
 
+/// <summary>
+/// Update{{domainname}}Command Handler
+/// </summary>
+/// <param name="{{humpdomainname}}Repository">{{domainname}}</param>
 public class Update{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository) : DedsiCommandHandler<Update{{domainname}}Command, bool>
 {
     public override async Task<bool> Handle(Update{{domainname}}Command command, CancellationToken cancellationToken)

@@ -5,8 +5,14 @@ using FluentValidation;
 
 namespace {{projectname}}.{{domainname}}s.CommandHandlers;
 
+/// <summary>
+/// Delete {{domainname}} Command
+/// </summary>
 public record Delete{{domainname}}Command(Guid Id): DedsiCommand<bool>;
 
+/// <summary>
+/// Create {{domainname}} Command Validator
+/// </summary>
 public class Delete{{domainname}}CommandValidator : AbstractValidator<Delete{{domainname}}Command>
 {
     public Delete{{domainname}}CommandValidator()
@@ -15,6 +21,10 @@ public class Delete{{domainname}}CommandValidator : AbstractValidator<Delete{{do
     }
 }
 
+/// <summary>
+/// Delete{{domainname}}Command Handler
+/// </summary>
+/// <param name="{{humpdomainname}}Repository">{{domainname}}</param>
 public class Delete{{domainname}}CommandHandler(I{{domainname}}Repository {{humpdomainname}}Repository): DedsiCommandHandler<Delete{{domainname}}Command, bool>
 {
     public override async Task<bool> Handle(Delete{{domainname}}Command command, CancellationToken cancellationToken)

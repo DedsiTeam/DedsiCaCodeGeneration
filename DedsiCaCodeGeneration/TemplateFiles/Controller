@@ -70,5 +70,20 @@ public class {{domainname}}Controller(
     {
         return {{humpdomainname}}Query.PagingQueryAsync(input, HttpContext.RequestAborted);
     }
+
+    /// <summary>
+    /// Export By Paging Query
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<IActionResult> ExportByPagingQueryAsync({{domainname}}PagingQueryInputDto input)
+    {
+        input.IsExport = true;
+        var result = await DraftPagingQueryAsync(input);
+
+        var memoryStream = new MemoryStream();
+        return File(memoryStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ExportByPagingQuery.xlsx");
+    }
     
 }
