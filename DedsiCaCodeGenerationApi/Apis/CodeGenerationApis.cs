@@ -28,7 +28,7 @@ public static class CodeGenerationApis
 
         // Domain
         var text = await File.ReadAllTextAsync($"{templateFilePath}\\Domain");
-        var Domain = Template.Parse(text).Render();
+        var Domain = Template.Parse(text).Render(inputData);
 
         // CreateCommandHandler
         text = await File.ReadAllTextAsync($"{templateFilePath}\\CommandHandlers\\CreateCommandHandler");
